@@ -1,0 +1,182 @@
+<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <div class="container">
+    <header class="header">
+      <div class="row">
+        <div class="col-md-6"><label class="pad10" translate>ACSESS_TITLE</label>
+          <button type="submit" class="button1"  translate>SEARCH</button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <section class="main" id="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"><span class="mandatory-sec" translate>IS_MANDET</span></div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row form-group">
+            <label class="col-sm-6" translate>OPERATION_TYPE</label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+                <select class="form-control">
+                  <option translate type="button">NEW_REGISTRATION</option>
+                  <option translate type="button">SEND</option>
+                  <option translate type="button">DELETE</option>
+                  <option translate type="button">PRINT</option>
+                </select>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+            <label class="col-sm-6 col-md-6"  translate>OPERATION_DPT</label>
+            <div class="col-sm-6 col-md-6 button-set">
+              <input type="text" class="form-control" name="appDpt"  #oprnDt="ngModel" [(ngModel)]="accessLog.appDpt" >
+              <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+               <button type="button" class="button1 ml-1" translate>CLEAR</button>
+              <div *ngIf="f.submitted && oprnDt.invalid" class="mandet-field">
+                <div *ngIf="oprnDt.errors.required" translate>PLS_FIll_ERROR</div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row form-group">
+            <label class="col-sm-6" translate>OPERATION_DATE<span class="red">*</span></label>
+            <div class="col-sm-6">
+              <div class="calender-sec">
+                <input type="text" class="form-control" name="dp" [(ngModel)]="accessLog.deadline" ngbDatepicker #d="ngbDatepicker"
+                 [placement]="placement" [positionTarget]="buttonEl" #deadline="ngModel" [ngClass]="{ 'is-invalid': f.submitted && deadline.invalid }"
+                  [minDate]="accessLog.startDate" [maxDate]="accessLog.beforeContractEndDate" required>
+                <i #buttonEl (click)="d.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                <div *ngIf="f.submitted && deadline.invalid" class="mandet-field">
+                  <div *ngIf="deadline.errors.required" translate>PLS_FIll_ERROR</div>
+              </div>
+            </div>
+          </div>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+            <label class="col-sm-6" translate>OPERATOR</label>
+            <div class="col-sm-6 button-set">
+              <input type="text" class="form-control" name="operator"  #oprtr="ngModel" [(ngModel)]="accessLog.oprtr" />
+              <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+              <button type="button" class="button1 ml-1" translate>CLEAR</button>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row form-group">
+            <label class="col-sm-6" translate>CONTROL_NUMBER</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="controlNumber" [(ngModel)]="accessLog.cNum" />
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row form-group">
+            <label class="col-sm-6" translate>PROJECTS</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="projectName" [(ngModel)]="accessLog.pName" />
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="submit" class="button1 submit-btn" translate>SEARCH <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="row shorting-bar">
+          <div class="col-md-3"><label translate>SHOWING <strong>1–16 of 40</strong> RESULTS</label></div>
+          <div class="col-md-6">
+            <div class="sorting-sec">
+              <label translate>SHOW_BY</label>
+              <ul>
+                <li><span class="prev-button"><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><span class="next-button"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3"><label class="total-cases" translate>THE_TOALNOFC<span>: </span> <strong>50</strong></label></div>
+        </div>
+        <div class="row button-bar">
+          <div class="col-sm-6"><strong class="table-title" translate>ACSESS_TITLE</strong></div>
+          <div class="col-sm-6">
+            <div class="button-set2">
+              <button type="button" class="button1" translate>CSV</button>
+              <button type="button" class="button1" translate><i class="fa fa-print" aria-hidden="true"></i> PRINT</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="table-responsive">
+            <table class="table">
+            <tr>
+              <th align="left" valign="middle" translate>CONTRACT_NUMBER</th>
+              <th align="left" valign="middle" translate>PNAME</th>
+              <th align="left" valign="middle" translate>OPERATOR</th>
+              <th align="left" valign="middle" translate>OPERATION_DATE</th>
+              <th align="left" valign="middle" translate>OPERATION_TYPE</th>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">1</td>
+              <td align="left" valign="middle">File Name</td>
+              <td align="left" valign="middle">Operator</td>
+              <td align="left" valign="middle">Operation Date</td>
+              <td align="left" valign="middle">Operation Type</td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">2</td>
+              <td align="left" valign="middle">File Name</td>
+              <td align="left" valign="middle">Operator</td>
+              <td align="left" valign="middle">Operation Date</td>
+              <td align="left" valign="middle">Operation Type</td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">3</td>
+              <td align="left" valign="middle">File Name</td>
+              <td align="left" valign="middle">Operator</td>
+              <td align="left" valign="middle">Operation Date</td>
+              <td align="left" valign="middle">Operation Type</td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">4</td>
+              <td align="left" valign="middle">File Name</td>
+              <td align="left" valign="middle">Operator</td>
+              <td align="left" valign="middle">Operation Date</td>
+              <td align="left" valign="middle">Operation Type</td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">5</td>
+              <td align="left" valign="middle">File Name</td>
+              <td align="left" valign="middle">Operator</td>
+              <td align="left" valign="middle">Operation Date</td>
+              <td align="left" valign="middle">Operation Type</td>
+            </tr>
+            <tr>
+              <td align="left" valign="middle">6</td>
+              <td align="left" valign="middle">File Name</td>
+              <td align="left" valign="middle">Operator</td>
+              <td align="left" valign="middle">Operation Date</td>
+              <td align="left" valign="middle">Operation Type</td>
+            </tr>
+            </table>
+          </div>
+        </div>
+
+    </div>
+  </section>
+</form>

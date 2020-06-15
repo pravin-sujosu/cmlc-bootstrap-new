@@ -1,0 +1,541 @@
+<form  class="form-horizontal" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+  <div class="container">
+    <header class="header">
+      <div class="row">
+        <div class="col-md-6">
+          <label class="pad10" translate>C_M_L</label>
+          <button type="submit" class="button1 ml-1" translate>SEARCH</button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <section class="main" id="main">
+    <div class="container">
+        <div class="row">
+          <div class="col-md-12"><span class="mandatory-sec"translate>IS_MANDET</span></div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>CLASSIFICATION<span class="red">*</span></label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+                <select class="form-control" name="Classification" [(ngModel)]="caseMgmt.classinfn" #class="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && class.invalid }" required>
+                        <option value='cMgmt' translate>C_MGMT</option>
+                        <option value='LegConMgmt' translate>Legal_C_M</option>
+                      </select>
+                      <div *ngIf="f.submitted && class.invalid" class="mandet-field">
+                        <div *ngIf="class.errors.required" translate>PLS_FIll_ERROR</div>
+                      </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>CONTROL_NUMBER</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="cNum" [(ngModel)]="caseMgmt.cNum" />
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>RECEPTION_DATE </label>
+            <div class="col-sm-6">
+              <div class="calender-sec">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="recDate" [(ngModel)]="caseMgmt.recDate" ngbDatepicker
+                #recDate="ngbDatepicker" [placement]="placement" [positionTarget]="recDateEl" required>
+                <i #recDateEl class="fa fa-calendar" (click)="recDate.toggle()" aria-hidden="true"></i>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>APPL_DATE<span class="red">*</span></label>
+            <div class="col-sm-6">
+              <div class="calender-sec">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="appnDate" [(ngModel)]="caseMgmt.appnDat"
+                ngbDatepicker #c="ngbDatepicker" [placement]="placement" [positionTarget]="concEl"
+                #appnDate="ngModel" [ngClass]="{ 'is-invalid': f.submitted && appnDate.invalid }" required>
+                <i #concEl class="fa fa-calendar" (click)="c.toggle()" aria-hidden="true"></i>
+              </div>
+              <div *ngIf="f.submitted && appnDate.invalid" class="mandet-field">
+                <div *ngIf="appnDate.errors.required" translate>PLS_FIll_ERROR</div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>APPLY_F_DEPT</label>
+            <div class="col-sm-6 button-set">
+              <input type="text" class="form-control" name="appDpt" [(ngModel)]="caseMgmt.appDpt" />
+              <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+                    <button type="button" class="button1 ml-1" translate>CLEAR</button>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>APPLICANT<span class="red">*</span></label>
+            <div class="col-sm-6 button-set">
+              <input type="text" class="form-control" name="application" [(ngModel)]="caseMgmt.application" />
+              <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+                    <button type="button" class="button1 ml-1" translate>CLEAR</button>
+              <div *ngIf="f.submitted && appnDate.invalid" class="mandet-field">
+                <div *ngIf="appnDate.errors.required" translate>PLS_FIll_ERROR</div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>CONTRACT_NAME</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="contractName" [(ngModel)]="caseMgmt.contractName" />
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>CONTRACT_ITEM</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="ContractedItem" [(ngModel)]="caseMgmt.ContractedItem" />
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>INC_APPN_SEC<span class="red">*</span></label>
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-md-6">
+                    <label class="chkbox-outer" translate>TRUE
+                      <input type="checkbox" name="acceptTerms" [(ngModel)]="caseMgmt.acceptTerms"
+                      #acceptTerm="ngModel"  [ngClass]="{ 'is-invalid': f.submitted && acceptTerm.invalid }" required>
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+                <div class="col-md-6">
+                    <label class="chkbox-outer" translate>FALSE
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+              <div *ngIf="f.submitted && acceptTerm.invalid" class="red">
+                <div *ngIf="acceptTerm.errors.required" translate>Select atleast one</div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>N/R</label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+              <select class="form-control">
+                <option translate>NEW</option>
+                <option translate>RENEWAL</option>
+              </select>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>AUTOMATIC_UPDATE</label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+              <select class="form-control">
+                <option translate>YES</option>
+                <option translate>NO</option>
+              </select>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>CONTRACT_TYPE<span class="red">*</span></label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+                <select class="form-control" name="country" [(ngModel)]="caseMgmt.contract" #cType="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && cType.invalid }" required>
+                <option *ngFor="let item of contractTypes" [value]="item" translate>
+                  {{item}}
+                </option>
+              </select>
+              <div *ngIf="f.submitted && cType.invalid" class="red">
+                <div *ngIf="cType.errors.required" translate>PLS_FIll_ERROR</div>
+              </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>CONTRACTOR</label>
+            <div class="col-sm-6 button-set">
+              <input type="text" class="form-control" name="contractor" [(ngModel)]="caseMgmt.contractor" />
+              <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+                    <button type="button" class="button1 ml-1" translate>CLEAR</button>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>BEG_PERIOD</label>
+            <div class="col-sm-6">
+              <div class="calender-sec">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="recDate" [(ngModel)]="caseMgmt.beginDate" ngbDatepicker
+                        #beginDate="ngbDatepicker" [placement]="placement" [positionTarget]="beginDateEl" required>
+                      <div class="input-group-append">
+                <i  #beginDateEl (click)="beginDate.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>END_PERIOD</label>
+            <div class="col-sm-6">
+              <div class="calender-sec">
+                <input class="form-control" placeholder="yyyy-mm-dd" name="recDate" [(ngModel)]="caseMgmt.endDate" ngbDatepicker
+                        #endDate="ngbDatepicker" [placement]="placement" [positionTarget]="endDateEl" required />
+                <i #endDateEl class="fa fa-calendar" (click)="endDate.toggle()" aria-hidden="true"></i>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>LEGAL_REPRESENTATIVE</label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+              <select class="form-control">
+                <option translate>YES</option>
+                <option translate>NO</option>
+              </select>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>FIX_VERSION_CONTRACT_ATTACHED</label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+              <select class="form-control">
+                <option translate>YES</option>
+                <option translate>NO</option>
+              </select>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>EXTCONSULT</label>
+            <div class="col-sm-6">
+              <div class="custom-dropdown">
+              <select class="form-control">
+                <option translate>YES</option>
+                <option translate>NO</option>
+              </select>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>LEGAL_DEPARTMENT_NOTES</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" name="legadlDptNote" [(ngModel)]="caseMgmt.legadlDptNote" />
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+            <label class="col-sm-3" translate>STATUS</label>
+            <div class="col-sm-9">
+              <div class="row">
+              <div class="col-md-6" *ngFor="let item of statusArray; index as i">
+                <label class="chkbox-outer" translate>{{item.name}}
+                  <input type="checkbox" name="{{item.name}}" value="{{item.value}}" required [(ngModel)]="item.checked" >
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="red" *ngIf="!isAtleastOneItemSelected()" translate>Select atleast one</div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+            <label class="col-sm-3" translate>RELATED_COUNTRIES</label>
+            <div class="col-sm-9">
+              <div class="row">
+              <div class="col-md-3">
+                <label class="chkbox-outer" translate>US
+                  <input type="checkbox" checked="checked">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="chkbox-outer" translate>CHINA
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="chkbox-outer" translate>TAIWAN
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="chkbox-outer" translate>INDIA
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="chkbox-outer" translate>KOREA
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="chkbox-outer" translate>EUROPE
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="col-md-3">
+                <label class="chkbox-outer" translate>OTHERS
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="button1 submit-btn" disabled translate>SEARCH <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="row shorting-bar">
+          <div class="col-md-3"><label translate>SHOWING <strong>1–16 of 40</strong> RESULTS</label></div>
+          <div class="col-md-6">
+            <div class="sorting-sec">
+              <label translate>SHOW_BY</label>
+              <ul>
+                <li><span class="prev-button"><i class="fa fa-chevron-left" aria-hidden="true"></i></span></li>
+                <li class="active"><span>1</span></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><span class="next-button"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3"><label class="total-cases" translate>TOTAL_CASES<strong>50</strong></label></div>
+        </div>
+        <div class="row button-bar">
+          <div class="col-sm-6"><strong class="table-title" translate>C_M_L</strong></div>
+          <div class="col-sm-6">
+            <div class="button-set2">
+              <button type="button" class="button1" translate>CSV</button>
+              <button type="button" class="button1" translate><i class="fa fa-print" aria-hidden="true"></i> PRINT</button>
+            </div>
+          </div>
+        </div>
+        <div id="table-scroll" class="row table-scroll">
+					<div class="table-responsive table-wrap">
+					  <table class="table case-table">
+						<thead>
+              <tr>
+                <th align="left" valign="middle" class="fixed-side" translate> CONTROL_NUMBER</th>
+                <th align="left" valign="middle" class="fixed-side" translate>B_NUM</th>
+                <th align="left" valign="middle" class="fixed-side" translate>APPLY_F_DEPT</th>
+                <th align="left" valign="middle" class="fixed-side" translate>APPLICANT</th>
+                <th align="left" valign="middle" translate>APPL_DATE</th>
+                <th align="left" valign="middle" translate>CONTRACT_NAME</th>
+                <th align="left" valign="middle" translate>CONTRACT_TYPE</th>
+                <th align="left" valign="middle" translate>N/R</th>
+                <th align="left" valign="middle" translate>CONTRACTOR</th>
+                <th align="left" valign="middle" translate>CBD</th>
+                <th align="left" valign="middle" translate>CED</th>
+                <th align="left" valign="middle" translate>STATUS</th>
+                <th align="left" valign="middle" translate>LEGAL_REPRESENTATIVE</th>
+                <th align="left" valign="middle" translate>REMARKS</th>
+                <th align="left" valign="middle" translate>SCCLASS</th>
+              </tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="left" valign="middle" class="fixed-side">1</td>
+								<td align="left" valign="middle" class="fixed-side">2</td>
+								<td align="left" valign="middle" class="fixed-side"><span class="depertment" translate>DEPARTMENT</span></td>
+								<td align="left" valign="middle" class="fixed-side">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle"><span class="new" translate>NEW</span></td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+							</tr>
+							<tr>
+								<td align="left" valign="middle" class="fixed-side">1</td>
+								<td align="left" valign="middle" class="fixed-side">2</td>
+								<td align="left" valign="middle" class="fixed-side"><span class="depertment" translate>DEPARTMENT</span></td>
+								<td align="left" valign="middle" class="fixed-side">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">
+									<div class="table-hover">
+										<span class="dotted-text">dummy text</span>
+										<div class="table-hover-inner">
+											<h2>Dummy Text</h2>
+											<div class="hover-content">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+											</div>
+										</div>
+										<span class="icon-show"><i class="fa fa-share-square" aria-hidden="true"></i></span>
+									</div>
+								</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle"><span class="new" translate>NEW</span></td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+							</tr>
+							<tr>
+								<td align="left" valign="middle" class="fixed-side">1</td>
+								<td align="left" valign="middle" class="fixed-side">2</td>
+								<td align="left" valign="middle" class="fixed-side"><span class="depertment" translate>DEPARTMENT</span></td>
+								<td align="left" valign="middle" class="fixed-side">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">
+									<div class="table-hover">
+										<span class="dotted-text">dummy text</span>
+										<div class="table-hover-inner">
+											<h2>Dummy Text</h2>
+											<div class="hover-content">
+												<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+											</div>
+										</div>
+										<span class="icon-show"><i class="fa fa-share-square" aria-hidden="true"></i></span>
+									</div>
+								</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle"><span class="new" translate>NEW</span></td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+							</tr>
+							<tr>
+								<td align="left" valign="middle" class="fixed-side">1</td>
+								<td align="left" valign="middle" class="fixed-side">2</td>
+								<td align="left" valign="middle" class="fixed-side"><span class="depertment" translate>DEPARTMENT</span></td>
+								<td align="left" valign="middle" class="fixed-side">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle"><span class="renew" translate>RENEW</span></td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+							</tr>
+							<tr>
+								<td align="left" valign="middle" class="fixed-side">1</td>
+								<td align="left" valign="middle" class="fixed-side">2</td>
+								<td align="left" valign="middle" class="fixed-side"><span class="depertment" translate>DEPARTMENT</span></td>
+								<td align="left" valign="middle" class="fixed-side">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle"><span class="renew" translate>RENEW</span></td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+							</tr>
+							<tr>
+								<td align="left" valign="middle" class="fixed-side">1</td>
+								<td align="left" valign="middle" class="fixed-side">2</td>
+								<td align="left" valign="middle" class="fixed-side"><span class="depertment" translate>DEPARTMENT</span></td>
+								<td align="left" valign="middle" class="fixed-side">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle"><span class="renew" translate>RENEW</span></td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+								<td align="left" valign="middle">dummy text</td>
+							</tr>
+
+						</tbody>
+					  </table>
+					</div>
+				</div>
+
+    </div>
+  </section>
+</form>
+
+

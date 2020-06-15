@@ -1,0 +1,37 @@
+<form class="form-horizontal" name="form" (ngSubmit)="(f.form.valid) && onSubmit(f)" #f="ngForm" novalidate>
+  <div class="container">
+    <header class="header">
+      <div class="row">
+        <div class="col-md-6"><label class="pad10" translate>I_C_I_D</label>
+          <button type="submit" class="button1" translate>CAPTURE</button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <section class="main" id="main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12"><span class="mandatory-sec"translate>IS_MANDET</span></div>
+      </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+            <label class="col-sm-6" translate>FILE_SPEC<span class="red">*</span></label>
+            <div class="col-sm-6">
+              <div class="button-sec">
+                <input type="text" class="form-control" name="fileSpec"  #fileSpec="ngModel" [(ngModel)]="importCaseData.fileSpec" />
+                <input style="display: none;" #specFile type="file" (change)="onSelectFile($event, 'legalFIle')" multiple />
+                <button type="button" (click)="specFile.click()" translate>ADD</button>
+              </div>
+              <span *ngIf="f.submitted && fileSpec.invalid" class="mandet-field">
+                <span *ngIf="fileSpec.errors.required">PLS_FIll_ERROR</span>
+              </span>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+</form>
+

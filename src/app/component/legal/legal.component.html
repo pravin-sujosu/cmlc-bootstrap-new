@@ -1,0 +1,351 @@
+<!-- <h1 class="text red text-center m-5 wlcm_msg" translate>WelcomeMessage</h1> -->
+<form name="form" (ngSubmit)="(f.form.valid) && onSubmit(f)" #f="ngForm" novalidate>
+    <div class="container">
+        <header class="header">
+            <div class="row">
+                <div class="col-md-4 col-lg-3"><span translate>Legal_C_M </span></div>
+                <div class="col-md-5 col-lg-6">
+                    <nav class="navbar navbar-default">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="navbar-collapse collapse" id="navbar">
+                                <ul class="nav navbar-nav">
+                                    <li><span translate>SAVE</span></li>
+                                    <li>
+                                        <button type="submit" translate>SUBMIT</button>
+                                    </li>
+                                    <li><span translate>RESET</span></li>
+                                    <li><span id="call_print" translate>PRINT</span></li>
+                                    <li><span type="button" translate>DELETE</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-md-3 col-lg-3"><span class="red" translate>SECURITY_CASE</span></div>
+            </div>
+        </header>
+    </div>
+
+    <section class="main f-13" id="main">
+        <div class="container shadow-none p-3 mb-5 bg-light rounded">
+
+            <div class="row">
+                <div class="col-md-12"><span class="mandatory-sec"translate>IS_MANDET</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-6 col-sm-6" translate>PNAME<span class="red">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input type="text" class="form-control" name="projectName" [(ngModel)]="legal.projectName" #projectName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && projectName.invalid }" required>
+                            <div *ngIf="f.submitted && projectName.invalid" class="red">
+                                <div *ngIf="projectName.errors.required" translate>PLS_FIll_ERROR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-6 col-sm-6" translate>MNUMBER</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input type="text" class="form-control" name="controlNumber" [(ngModel)]="legal.controlNumber" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>APPL_DATE</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="applnDate" [(ngModel)]="legal.applnDate" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>APPL_DIVISION</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="appDivsn" [(ngModel)]="legal.appDivsn" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LDPD</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="legaldpt" [(ngModel)]="legal.legaldpt" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>APPLY_F_DEPT</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="appdpt" [(ngModel)]="legal.appdpt" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+
+                      <label class="col-sm-6" translate>LDRT<span class="red">*</span></label>
+                      <div class="col-sm-6">
+                        <div class="calender-sec">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="legal.conclusion"
+                          ngbDatepicker #c="ngbDatepicker" [placement]="placement" [positionTarget]="concEl"
+                          #conclusion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && conclusion.invalid }" required>
+                          <i #concEl (click)="c.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                          <div *ngIf="f.submitted && conclusion.invalid" class="red">
+                          <div *ngIf="conclusion.errors.required" translate>PLS_FIll_ERROR</div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6 col-md-6" translate>APPLICANT<span class="red">*</span></label>
+                        <div class="col-sm-6 col-md-6 button-set">
+                            <input type="text" class="form-control" name="applicant" [(ngModel)]="legal.applicant" #applicant="ngModel" [ngClass]="{ 'is-invalid': f.submitted && applicant.invalid }" required>
+                            <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+                            <button type="button" class="button1 ml-1" (click)="legal.applicant = ''" translate clic>CLEAR</button>
+                            <span *ngIf="f.submitted && applicant.invalid" class="mandet-field">
+                    <span *ngIf="applicant.errors.required" translate>PLS_FIll_ERROR</span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row form-group">
+                    <label class="col-sm-6" translate>STATUS<span class="red">*</span></label>
+                    <div class="col-sm-6">
+                        <div class="custom-dropdown">
+                            <select class="form-control" name="country" [(ngModel)]="legal.selectedStatus" #status="ngModel" [ngClass]="{ 'is-invalid': f.submitted && status.invalid }" required>
+                                <option *ngFor="let item of statusData" [value]="item" translate>
+                                    {{item}}
+                                </option>
+                            </select>
+
+                            <div *ngIf="f.submitted && status.invalid" class="red">
+                                <div *ngIf="status.errors.required" translate>PLS_FIll_ERROR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>PERSON_CONCERN<span class="red">*</span></label>
+
+                        <div class="col-sm-6 col-md-6 button-set">
+                            <input type="text" class="form-control" name="concern" [(ngModel)]="legal.concern" #concern="ngModel" [ngClass]="{ 'is-invalid': f.submitted && concern.invalid }" required>
+                            <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+                            <button type="button" class="button1 ml-1" (click)="legal.concern = ''" translate>CLEAR</button>
+                            <div *ngIf="f.submitted && concern.invalid" class="mandet-field">
+                                <div *ngIf="concern.errors.required" translate>PLS_FIll_ERROR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LEGAL_REPRESENTATIVE</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="legalRps" [(ngModel)]="legal.legalRps" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row form-group">
+                      <label class="col-sm-6" translate>LEGAL_DEPARTMENT_NOTES</label>
+                      <div class="col-sm-6">
+                          <input type="text" class="form-control" name="legalDptN" [(ngModel)]="legal.legalDptN" />
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LEGAL_DEPARTMENT_ITEM</label>
+                        <div class="col-sm-6">
+                            <div class="button-sec">
+                                <input type="text" class="form-control" name="legalDptI" [(ngModel)]="legal.legalDptI" />
+                                <input style="display: none;" #legalFile type="file" (change)="onSelectFile($event, 'legalFIle')" multiple />
+                                <button type="button" (click)="legalFile.click()" translate>ADD</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="row form-group">
+                    <label class="col-sm-6" translate>EXTCONSULT</label>
+                    <div class="col-sm-6">
+                      <div class="custom-dropdown">
+                        <select class="form-control" name="autoUpd" [(ngModel)]="legal.alreadyExtConsult">
+                          <option  value='yes' translate>YES</option>
+                          <option  value='no' translate>NO</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row form-group">
+                  <label class="col-sm-6" translate>NAMEEXTCONSULT</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" name="boxNum" [(ngModel)]="legal.nameOfConsult" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="horizontalTab" class="tab-sec panel with-nav-tabs panel-default">
+                        <div class="panel-heading" id="nav-tab" role="tablist">
+                            <ul class="nav nav-tabs m-0">
+                                <li class="active"><a href="#tab2default" data-toggle="tab" translate> MASSEGE_CONTENT</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="panel-body bg-white unset-padding">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade in active padding-30" id="tab2default">
+                                  <div class="tab-pad">
+                                    <div class="row">
+                                      <div class="col-md-12 mt-4">
+                                          <div class="row form-group">
+                                              <label class="col-sm-3" translate>MESSAGE<span class="red">*</span></label>
+                                              <div class="col-sm-9">
+                                                  <textarea class="form-control" name="message" [(ngModel)]="legal.message" rows="5"></textarea>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>ATTACHMENT</label>
+                                              <div class="col-sm-6">
+                                                  <div class="button-sec">
+                                                      <input type="text" class="form-control" name="legalDptI" [(ngModel)]="legal.legalDptI" />
+                                                      <input style="display: none;" #hh type="file"
+                                                      (change)="onSelectFile($event, 'ATTACHMENT')" multiple />
+                                                      <button type="button" (click)="hh.click()" translate>ADD</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>RESPONSE DATE</label>
+                                              <div class="col-sm-6">
+                                                  <div class="calender-sec">
+                                                      <input class="form-control" placeholder="yyyy-mm-dd" name="responseDate" [(ngModel)]="legal.responseDate" ngbDatepicker #responseDate="ngbDatepicker" [placement]="placement" [positionTarget]="responseDateEl">
+                                                      <i #responseDateEl (click)="responseDate.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <strong class="heading-sec" translate>HISTORY</strong>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>FROM(HISTORY)</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="fromHis" [(ngModel)]="legal.fromHis" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>STATUS(HISTORY)</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="statusHis" [(ngModel)]="legal.statusHis" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>SENT_DATE_AND_TIME</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="SendDT" [(ngModel)]="legal.SendDT" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                        <div class="row form-group">
+                                            <label class="col-sm-6" translate>ATTACHMENTS(HISTORY)</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="attchmtHis" [(ngModel)]="legal.attchmtHis" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="row form-group">
+                                              <label class="col-sm-3" translate>MESSAGE(HISTORY)</label>
+                                              <div class="col-sm-9">
+                                                  <textarea class="form-control" name="msgHis" [(ngModel)]="legal.msgHis" rows="5" readonly></textarea>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="row form-group">
+                                            <label class="col-sm-6" translate>STAKEHOLDER(HISTORY)</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="stakeHis" [(ngModel)]="legal.stakeHis" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                      <div class="col-md-6 link">
+                                        <a href="#" class="right"><i class="fa fa-external-link" aria-hidden="true"></i> <strong translate>DPMSG</strong></a>
+                                      </div>
+                                  </div>
+                                  </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</form>
+  <!-- ------end here -->

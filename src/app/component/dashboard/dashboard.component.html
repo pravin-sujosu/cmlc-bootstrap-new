@@ -1,0 +1,658 @@
+<!-- <h1 class="text red text-center m-5 wlcm_msg" translate>WelcomeMessage</h1> -->
+
+<form class="doNotPrint" name="form" (ngSubmit)="(f.form.valid) && onSubmit(f)" #f="ngForm" novalidate>
+    <div class="container">
+        <header class="header">
+            <div class="row">
+                <div class="col-md-4 col-lg-3"><span translate>C_MGMT </span></div>
+                <div class="col-md-5 col-lg-6">
+                    <nav class="navbar navbar-default">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </div>
+                            <div class="navbar-collapse collapse" id="navbar">
+                                <ul class="nav navbar-nav">
+                                    <li><button type="button" translate>SAVE</button></li>
+                                    <li>
+                                        <button type="submit" translate>SUBMIT</button>
+                                    </li>
+                                    <li><button  type="button" translate>RESET</button></li>
+                                    <li><button  type="button" (click)="openPrintPage()" translate>PRINT</button></li>
+                                    <li><button [ngClass]="{'borderNone' : contractContentArr[0].extConsult != 'yes'} " type="button" translate>DELETE</button></li>
+                                    <li><button  *ngIf="contractContentArr[0].extConsult == 'yes'" type="button" translate>APPLICATION</button></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+                <div class="col-md-3 col-lg-3"><span class="red" translate>SECURITY_CASE</span></div>
+            </div>
+        </header>
+    </div>
+
+    <section class="main f-13" id="main">
+        <div class="container shadow-none p-3 mb-5 bg-light rounded">
+
+            <div class="row">
+                <div class="col-md-12"><span class="mandatory-sec"translate>IS_MANDET</span></div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-6 col-sm-6" translate>PNAME<span class="red">*</span></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input type="text" class="form-control" name="projectName" [(ngModel)]="contract.projectName" #projectName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && projectName.invalid }" required>
+                            <div *ngIf="f.submitted && projectName.invalid" class="red">
+                                <div *ngIf="projectName.errors.required" translate>PLS_FIll_ERROR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-md-6 col-sm-6" translate>MNUMBER</label>
+                        <div class="col-md-6 col-sm-6">
+                            <input type="text" class="form-control" name="controlNumber" [(ngModel)]="contract.controlNumber" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>APPL_DATE</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="applnDate" [(ngModel)]="contract.applnDate" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>APPL_DIVISION</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="appDivsn" [(ngModel)]="contract.appDivsn" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LDPD</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="legaldpt" [(ngModel)]="contract.legaldpt" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>APPLY_F_DEPT</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="appdpt" [(ngModel)]="contract.appdpt" readonly />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>CONC_OF_S_D<span class="red">*</span></label>
+                        <div class="col-sm-6">
+                            <div class="calender-sec">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="contract.conclusion" ngbDatepicker #c="ngbDatepicker" [placement]="placement" [positionTarget]="concEl" #conclusion="ngModel" [ngClass]="{ 'is-invalid': f.submitted && conclusion.invalid }" (ngModelChange)="detectDate($event,'contract')" [minDate]="contract.startDate" [maxDate]="contract.beforeContractEndDate" required>
+                                <i #concEl (click)="c.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                                <!-- <div class="input-group-append">
+                      <button #concEl class="btn btn-outline-secondary calendar" (click)="c.toggle()"
+                        type="button"></button>
+                    </div> -->
+                                <div *ngIf="f.submitted && conclusion.invalid" class="red">
+                                    <div *ngIf="conclusion.errors.required" translate>PLS_FIll_ERROR</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6 col-md-6" translate>APPLICANT<span class="red">*</span></label>
+                        <div class="col-sm-6 col-md-6 button-set">
+                            <input type="text" class="form-control" name="applicant" [(ngModel)]="contract.applicant" #applicant="ngModel" [ngClass]="{ 'is-invalid': f.submitted && applicant.invalid }" required>
+                            <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+                            <button type="button" class="button1 ml-1" (click)="contract.applicant = ''" translate clic>CLEAR</button>
+                            <span *ngIf="f.submitted && applicant.invalid" class="mandet-field">
+                    <span *ngIf="applicant.errors.required" translate>PLS_FIll_ERROR</span>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LDRT<span class="red">*</span></label>
+                        <div class="col-sm-6">
+                            <div class="calender-sec">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="contract.deadline" ngbDatepicker #d="ngbDatepicker" [placement]="placement" [positionTarget]="buttonEl" #deadline [ngClass]="{ 'is-invalid': f.submitted && deadline.invalid }" (ngModelChange)="detectDate($event,'deadline')" [minDate]="contract.startDate" [maxDate]="contract.beforeContractEndDate" required>
+                                <i #buttonEl (click)="d.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                                <div *ngIf="f.submitted && deadline.invalid" class="mandet-field">
+                                    <div *ngIf="deadline.errors.required" translate>PLS_FIll_ERROR</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>PERSON_CONCERN<span class="red">*</span></label>
+
+                        <div class="col-sm-6 col-md-6 button-set">
+                            <input type="text" class="form-control" name="concern" [(ngModel)]="contract.concern" #concern="ngModel" [ngClass]="{ 'is-invalid': f.submitted && concern.invalid }" required>
+                            <button type="button" class="button1 ml-1" translate>REFERENCE</button>
+                            <button type="button" class="button1 ml-1" (click)="contract.concern = ''" translate>CLEAR</button>
+                            <div *ngIf="f.submitted && concern.invalid" class="mandet-field">
+                                <div *ngIf="concern.errors.required" translate>PLS_FIll_ERROR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>STATUS<span class="red">*</span></label>
+                        <div class="col-sm-6">
+                            <div class="custom-dropdown">
+                                <select class="form-control" name="country" [(ngModel)]="contract.selectedStatus" #status="ngModel" [ngClass]="{ 'is-invalid': f.submitted && status.invalid }" required>
+                                    <option *ngFor="let item of statusData" [value]="item">
+                                        {{item}}
+                                    </option>
+                                </select>
+
+                                <div *ngIf="f.submitted && status.invalid" class="red">
+                                    <div *ngIf="status.errors.required" translate>PLS_FIll_ERROR</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LEGAL_REPRESENTATIVE</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="legalRps" [(ngModel)]="contract.legalRps" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LEGAL_DEPARTMENT_NOTES</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="legalDptN" [(ngModel)]="contract.legalDptN" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>LEGAL_DEPARTMENT_ITEM</label>
+                        <div class="col-sm-6">
+                            <div class="button-sec">
+                                <input type="text" class="form-control" name="legalDptI" [(ngModel)]="contract.legalDptI" />
+                                <input style="display: none;" #legalFile type="file" (change)="onSelectFile($event, 'legalFIle')" multiple />
+                                <button type="button" (click)="legalFile.click()" translate>ADD</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>APPROVAL_DECISION_NUMBER</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="apprDNum" [(ngModel)]="contract.apprDNum" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>BOX_NUMBER</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="boxNum" [(ngModel)]="contract.boxNum" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row form-group">
+                        <label class="col-sm-6" translate>MANAGEMENT_STATE</label>
+                        <div class="col-sm-6">
+                            <div class="custom-dropdown">
+                                <select class="form-control">
+                                    <option translate>SELECT_ONE</option>
+                                    <option>Select one...</option>
+                                    <option>Select one...</option>
+                                    <option>Select one...</option>
+                                    <option>Select one...</option>
+                                    <option>Select one...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 pBottom-20">
+                    <div id="horizontalTab" class="tab-sec panel with-nav-tabs panel-default">
+                        <div class="panel-heading" id="nav-tab" role="tablist">
+                            <ul class="nav nav-tabs m-0">
+                                <li class="active"><a href="#tab1default" data-toggle="tab" translate>  CONTRACT_CONTENT</a></li>
+                                <li><a href="#tab2default" data-toggle="tab" translate> MASSEGE_CONTENT</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="panel-body bg-white unset-padding">
+                            <div class="tab-content" id="nav-tabContent">
+                                <!--Contract Content-->
+                                <div class="tab-pane fade in active" id="tab1default">
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="add-btn">
+                                              <button type="button" type="button1" class="btn custom-bg-color hover-fix" (click)="addContrcat()" translate>ADD <i class="fa fa-plus" aria-hidden="true"></i></button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div *ngFor="let cItem of contractContentArr; index as i">
+
+                                        <!--Accordian Section-->
+                                        <div class="accordion" id="accordionExample">
+                                            <div class="card panel panel-default margin-bottom-0 border-0">
+                                                <!-- Accordion card -->
+                                                <div class="card-header unset-padding" [id]="'heading'+cItem.id">
+                                                    <!-- Card header -->
+                                                    <h2 class="mb-0 panel-title heading-sec unset unset-padding"
+                                                    [ngClass]="{ 'margin-bottom-0':((i !=0) && (i == (contractContentArr.length - 1))) }">
+                                                      <button type="button" class="btn text-dark nounderline w-100 d-flex justify-content-between w-100"
+                                                        type="button" data-toggle="collapse" [attr.data-target]="'#collapseOne'+cItem.id"
+                                                        aria-expanded="true" [attr.aria-controls]="'collapseOne'+cItem.id">
+                                                        <span class="f-18-bold icon">
+                                                          {{i+1 < 10 ? '0'+(i+1) : i+1}}
+                                                        </span>
+                                                        <div>
+                                                          <i class="fa fa-angle-down foat-right icon f-18-bold" aria-hidden="true"></i>
+                                                          <button type="button" *ngIf="i > 0" type="button" class="button1 delete-button marginR-5"
+                                                            (click)="removeContract( i )" translate>DELETE
+                                                            <i class="fa fa-remove " aria-hidden="true"></i></button>
+                                                        </div>
+
+                                                      </button>
+                                                   </h2>
+                                                </div>
+                                                <!--End of Card header -->
+
+                                                <!-- Card body -->
+                                                <div [id]="'collapseOne'+cItem.id" class="panel-collapse collapse in padding-l-r"
+                                                [attr.aria-labelledby]="'heading'+cItem.id" data-parent="#accordionExample"
+                                                [ngClass]="{ 'margin-top-25':((i !=0) && (i == (contractContentArr.length - 1))) }">
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>NEW_RENEWAL<span class="red">*</span></label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="custom-dropdown">
+                                                                            <select class="form-control" name="renewal_{{cItem.id}}" [(ngModel)]="cItem.renewal" #renewal="ngModel" [ngClass]="{ 'is-invalid': f.submitted && renewal.invalid }" required>>
+                                                                                <option value='new'>New</option>
+                                                                                <option value='renewal'>Renewel</option>
+                                                                            </select>
+                                                                            <div *ngIf="f.submitted && renewal.invalid" class="red">
+                                                                                <div *ngIf="renewal.errors.required" translate>PLS_FIll_ERROR</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>CONTRACT_TYPE<span class="red">*</span></label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="custom-dropdown">
+                                                                            <div class="custom-dropdown">
+                                                                                <select class="form-control" name="contractType" [(ngModel)]="cItem.contractType" #cType="ngModel" [ngClass]="{ 'is-invalid': f.submitted && contractor.invalid }" required>
+                                                                                    <option [ngValue]="null">---Select type---</option>
+                                                                                    <option *ngFor="let type of contractorData" [value]="type">
+                                                                                        {{type}}
+                                                                                    </option>
+                                                                                </select>
+
+                                                                                <div *ngIf="f.submitted && cType.invalid" class="red">
+                                                                                    <div *ngIf="cType.errors.required" translate>PLS_FIll_ERROR</div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>CONTRACT_NAME</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" class="form-control" name="contractName" [(ngModel)]="cItem.contractName" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>CONTRACT_ITEM</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" class="form-control" name="contractItem" [(ngModel)]="cItem.contractItem" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+
+                                                            <div class="col-lg-6 col-md-12 ">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6 col-md-6" translate>CONTRACTOR<span class="red">*</span></label>
+                                                                    <div class="col-sm-6  col-md-6">
+                                                                        <div class="button-sec">
+                                                                            <input type="text" class="form-control" name="contractor" [(ngModel)]="cItem.contractor" #contractor="ngModel" [ngClass]="{ 'is-invalid': f.submitted && contractor.invalid }" required>
+                                                                            <button type="button" translate>REFERENCE</button>
+                                                                        </div>
+                                                                        <div *ngIf="f.submitted && contractor.invalid" class="red">
+                                                                          <div *ngIf="contractor.errors.required" translate>PLS_FIll_ERROR</div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>BEGINNING_DATE_OF_THE_CONTRACT</label>
+
+                                                                    <div class="col-sm-6">
+                                                                        <div class="calender-sec">
+                                                                            <input class="form-control" placeholder="yyyy-mm-dd" name="beginDofC" [(ngModel)]="cItem.beginDofC" ngbDatepicker #beginDofC="ngbDatepicker" [placement]="placement" [positionTarget]="beginDofCEl" [minDate]="contract.startDate" [maxDate]="cItem.EndDofC">
+                                                                            <i #beginDofCEl (click)="beginDofC.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>END_DATE_OF_THE_CONTRACT</label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="calender-sec">
+                                                                            <input class="form-control" placeholder="yyyy-mm-dd" name="EndDofC" [(ngModel)]="cItem.EndDofC" ngbDatepicker #EndDofC="ngbDatepicker" [minDate]="contract.endDate" (ngModelChange)="detectDate($event,'EndDofC',i)" [placement]="'bottom-right'" [positionTarget]="EndDofCEl">
+                                                                            <i #EndDofCEl (click)="EndDofC.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>AUTOMATIC_UPDATE</label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="custom-dropdown">
+                                                                            <select class="form-control" name="autoUpd" [(ngModel)]="cItem.autoUpd">
+                                                                                <option translate>YES</option>
+                                                                                <option translate>NO</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>ALERT_RELEASE_DATE<span class="red">*</span></label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="calender-sec">
+                                                                            <input class="form-control" placeholder="yyyy-mm-dd" name="alerRelDate" [(ngModel)]="cItem.alerRelDate" ngbDatepicker #ad="ngbDatepicker" [placement]="'top'" [positionTarget]="alerRelDateEl" #alerRelDate="ngModel" [ngClass]="{ 'is-invalid': f.submitted && alerRelDate.invalid }" required>
+                                                                            <i #alerRelDateEl (click)="ad.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                                                                            <div *ngIf="f.submitted && alerRelDate.invalid" class="red">
+                                                                                <div *ngIf="alerRelDate.errors.required" translate>PLS_FIll_ERROR</div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>RELATE_CONTRACT_NUMBER</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" name="name_{{ cItem.id }}" class="form-control" name="relateContNum" [(ngModel)]="cItem.relateContNum" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>EXSISTANCE_OF_THE_EXTERNAL_CONSULTANT</label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="custom-dropdown">
+                                                                            <select class="form-control" name="extConsult_{{ cItem.id }}" [(ngModel)]="cItem.extConsult" (change)="existHandler($event)">
+                                                                                <option value="yes" translate>YES</option>
+                                                                                <option value="no" translate>NO</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row form-group">
+                                                                    <label class="col-sm-6" translate>FIX_VERSION_CONTRACT_ATTACHED</label>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="button-sec">
+                                                                            <input type="text" class="form-control" name="fixVersion" [(ngModel)]="cItem.fixVersion" />
+                                                                            <input style="display: none;" #hh type="file"
+                                                                            (change)="onSelectFile($event, 'FIX')" multiple />
+                                                                            <button type="button" (click)="hh.click()" translate>ADD</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <label class="col-sm-3" id="{{ cItem.id }}" translate>RELATED_COUNTRIES</label>
+                                                                    <div class="col-sm-9">
+                                                                        <div class="row">
+                                                                          <div class="col-sm-3">
+                                                                            <label class="chkbox-outer" for="Japan_{{cItem.id}}" translate>JAPAN
+                                                                              <input type="checkbox" id="Japan_{{cItem.id}}" name="japan_{{cItem.id}}" [(ngModel)]="cItem.isJapan">
+                                                                              <span class="checkmark"></span>
+                                                                            </label>
+                                                                          </div>
+                                                                            <div class="col-md-3">
+                                                                              <label class="chkbox-outer" for="isUS_{{ cItem.id }}" translate>US
+                                                                                <input type="checkbox" id="isUS_{{ cItem.id }}" name="us{{ cItem.id }}" [(ngModel)]="cItem.isUS">
+                                                                                <span class="checkmark"></span>
+                                                                              </label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                                <label class="chkbox-outer" for="isChina_{{ cItem.id }}" translate>CHINA
+                                                                                <input type="checkbox" id="isChina_{{ cItem.id }}" name="isChina_{{ cItem.id }}" [(ngModel)]="cItem.isChina">
+                                                                                <span class="checkmark"></span>
+                                                                              </label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                              <label class="chkbox-outer" for="isTaiwan_{{ cItem.id }}" translate>TAIWAN
+                                                                                <input type="checkbox" id="isTaiwan_{{ cItem.id }}" name="isTaiwan_{{ cItem.id }}" [(ngModel)]="cItem.isTaiwan">
+                                                                                <span class="checkmark"></span>
+                                                                              </label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                              <label class="chkbox-outer" for="isIndia_{{ cItem.id }}" translate>INDIA
+                                                                                <input type="checkbox" id="isIndia_{{ cItem.id }}" name="isIndia_{{ cItem.id }}" [(ngModel)]="cItem.isIndia">
+                                                                                <span class="checkmark"></span>
+                                                                              </label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                              <label class="chkbox-outer" for="isEurope_{{ cItem.id }}" translate>EUROPE
+                                                                                <input type="checkbox" id="isEurope_{{ cItem.id }}" name="isEurope_{{ cItem.id }}" [(ngModel)]="cItem.isEurope">
+                                                                                <span class="checkmark"></span>
+                                                                              </label>
+                                                                            </div>
+                                                                            <div class="col-md-3">
+                                                                              <label class="chkbox-outer" for="isOther_{{ cItem.id }}" translate>OTHERS
+                                                                                <input type="checkbox" id="isOther_{{ cItem.id }}" name="isOther_{{ cItem.id }}" [(ngModel)]="cItem.isOther">
+                                                                                <span class="checkmark"></span>
+                                                                              </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <!-- End of Card body -->
+
+                                            </div>
+                                            <!-- End of  Accordion card -->
+                                        </div>
+                                    </div>
+                                    <!--End of Accordian Section-->
+
+                                </div>
+                                <!--End of Contract Content-->
+
+                                <div class="tab-pane fade padding-30" id="tab2default">
+                                  <div class="tab-pad">
+                                    <div class="row">
+                                      <div class="col-md-12 mt-4">
+                                          <div class="row form-group">
+                                              <label class="col-sm-3" translate>MESSAGE</label>
+                                              <div class="col-sm-9">
+                                                  <textarea class="form-control" name="message" [(ngModel)]="contract.message" rows="5"></textarea>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>ATTACHMENT</label>
+                                              <div class="col-sm-6">
+                                                  <div class="button-sec">
+                                                      <input type="text" class="form-control" name="legalDptI" [(ngModel)]="contract.legalDptI" />
+                                                      <input style="display: none;" #hh type="file"
+                                                      (change)="onSelectFile($event, 'ATTACHMENT')" multiple />
+                                                      <button type="button" (click)="hh.click()" translate>ADD</button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>RESPONSE DATE</label>
+                                              <div class="col-sm-6">
+                                                  <div class="calender-sec">
+                                                      <input class="form-control" placeholder="yyyy-mm-dd" name="responseDate" [(ngModel)]="contract.responseDate" ngbDatepicker #responseDate="ngbDatepicker" [placement]="placement" [positionTarget]="responseDateEl">
+                                                      <i #responseDateEl (click)="responseDate.toggle()" class="fa fa-calendar" aria-hidden="true"></i>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <strong class="heading-sec" translate>HISTORY</strong>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>FROM(HISTORY)</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="fromHis" [(ngModel)]="contract.fromHis" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>STATUS(HISTORY)</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="statusHis" [(ngModel)]="contract.statusHis" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>SENT_DATE_AND_TIME</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="SendDT" [(ngModel)]="contract.SendDT" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>STAKEHOLDER(HISTORY)</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="stakeHis" [(ngModel)]="contract.stakeHis" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="row form-group">
+                                              <label class="col-sm-3" translate>MESSAGE(HISTORY)</label>
+                                              <div class="col-sm-9">
+                                                  <textarea class="form-control" name="msgHis" [(ngModel)]="contract.msgHis" rows="5" readonly></textarea>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="row form-group">
+                                              <label class="col-sm-6" translate>ATTACHMENTS(HISTORY)</label>
+                                              <div class="col-sm-6">
+                                                  <input type="text" class="form-control" name="attchmtHis" [(ngModel)]="contract.attchmtHis" readonly />
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6 link">
+                                        <a href="#" class="right"><i class="fa fa-external-link" aria-hidden="true"></i> <strong translate>DPMSG</strong></a>
+                                      </div>
+                                  </div>
+                                  </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</form>

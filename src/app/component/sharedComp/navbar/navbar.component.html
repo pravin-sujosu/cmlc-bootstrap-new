@@ -1,0 +1,64 @@
+<div style="height: 80vh;">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button
+        mat-icon-button
+        (click)="sidenav.toggle()"
+        fxShow="true"
+        fxHide.gt-sm
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>CMCL</span>
+      <span class="menu-spacer"></span>
+
+      <div class="spacer"></div>
+
+      <div style="float: right;" fxShow="true" fxHide.lt-md>
+        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+
+        <a routerLink="" routerLinkActive="active" mat-button>{{
+          "CFORM" | translate
+        }}</a>
+        <a routerLink="/legalForm" routerLinkActive="active" mat-button>{{
+          "LFORM" | translate
+        }}</a>
+        <a
+          translate
+          routerLink="/accessLog"
+          routerLinkActive="active"
+          mat-button
+          >{{ "ACCESSLOG" | translate }}</a
+        >
+        <a
+          translate
+          routerLink="/caseMgmt"
+          routerLinkActive="active"
+          mat-button
+          >{{"CASE_MGMT" | translate}}</a
+        >
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" mat-list-item>Close</a>
+        <a routerLink="" routerLinkActive="active" mat-list-item>{{
+          "CFORM" | translate
+        }}</a>
+        <a routerLink="/legalForm" routerLinkActive="active" mat-list-item>{{
+          "LFORM" | translate
+        }}</a>
+        <a routerLink="/accessLog" routerLinkActive="active" mat-list-item>{{
+          "ACCESSLOG" | translate
+        }}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <!-- <mat-sidenav-content fxFlexFill>Main content</mat-sidenav-content> -->
+    <mat-sidenav-content>
+      <!-- <router-outlet></router-outlet> -->
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

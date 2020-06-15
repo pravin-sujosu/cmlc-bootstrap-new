@@ -1,0 +1,78 @@
+.panel.with-nav-tabs{
+  background: transparent;
+    border: none;
+    box-shadow: unset;
+}
+.panel.with-nav-tabs .panel-heading{
+  padding: 5px 5px 0 0;
+  background-image:unset;
+  border-color: 00479d;
+  border-bottom : 3px solid #00479d;
+}
+.panel.with-nav-tabs .nav-tabs{
+border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+margin-bottom: -1px;
+}
+/*** PANEL DEFAULT ***/
+.with-nav-tabs.panel-default .nav-tabs > li > a,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+  color:red;
+}
+.with-nav-tabs.panel-default .nav-tabs > li > a{
+  background:#393939;
+  color: white;
+  margin-right: 7px
+}
+.with-nav-tabs.panel-default .nav-tabs > .open > a,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > .open > a:focus,
+.with-nav-tabs.panel-default .nav-tabs > li > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li > a:focus {
+  color: #777;
+background-color: #ddd;
+border-color: transparent;
+}
+.with-nav-tabs.panel-default .nav-tabs > li.active > a,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:hover,
+.with-nav-tabs.panel-default .nav-tabs > li.active > a:focus {
+color: white;
+background-color: #00479d;
+border-color: #00479d;
+border-bottom-color: transparent;
+}
+@media (max-width: 768px) {
+  .panel.with-nav-tabs .panel-heading{
+    padding: 0px !important;
+  }
+  .with-nav-tabs.panel-default .nav-tabs{
+    width: 100%;
+  }
+  .with-nav-tabs.panel-default .nav-tabs > li{
+    width: 100%;
+  }
+  .with-nav-tabs.panel-default .nav-tabs > li >a:hover{
+    color: white !important;
+    background-color: #00479d !important;
+  }
+  .with-nav-tabs.panel-default .nav-tabs > li:first-child{
+    margin-bottom: 10px !important;
+  }
+  .with-nav-tabs.panel-default .nav-tabs > li > a{
+    background: #ddd !important;
+    border-color: #ddd !important;
+    color: black !important;
+    margin: 0 !important;
+  }
+  .panel.with-nav-tabs .panel-heading{
+    border-bottom : 3px solid transparent;
+  }
+  .accordian >.panel{
+    margin-bottom: 0px !important;
+  }
+  ul li > button{
+    border:none !important;
+  }
+}
